@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Title -->
+    <title>修改团队</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta charset="UTF-8">
+    <meta name="description" content="Responsive Admin Dashboard Template"/>
+    <meta name="keywords" content="admin,dashboard"/>
+    <meta name="author" content="Steelcoders"/>
+
+    <!-- Styles -->
+    <link type="text/css" rel="stylesheet" href="/static/assets/plugins/materialize/css/materialize.min.css"/>
+    <link href="/static/assets/icon.css" rel="stylesheet">
+    <link href="/static/assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
+
+
+    <!-- Theme Styles -->
+    <link href="/static/assets/css/alpha.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/assets/css/custom.css" rel="stylesheet" type="text/css"/>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script src="/static/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+</head>
+<body>
+<div class="loader-bg"></div>
+<div class="loader">
+    <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="spinner-layer spinner-spinner-teal lighten-1">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mn-content fixed-sidebar">
+    <header class="mn-header navbar-fixed">
+        <nav class="cyan darken-1">
+            <div class="nav-wrapper row">
+                <section class="material-design-hamburger navigation-toggle">
+                    <a href="#" data-activates="slide-out"
+                       class="button-collapse show-on-large material-design-hamburger__icon">
+                        <span class="material-design-hamburger__layer"></span>
+                    </a>
+                </section>
+                <div class="header-title col s3">
+                    <span class="chapter-title">Alpha</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <aside id="slide-out" class="side-nav white fixed">
+        <div class="side-nav-wrapper">
+            {% include "xitong/htmenu.html" %}
+        </div>
+    </aside>
+    <main class="mn-inner">
+        <div class="row">
+            <div class="col s12">
+                <div class="page-title">修改团队</div>
+            </div>
+            <div class="col s12 m12 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">修改团队</span><br>
+                        <div class="row">
+                            <form class="col s12" action="{% url 'team:xiugaiteamact' %}" method="post"
+                                  enctype="multipart/form-data">
+                                <input style='display:none;' name='id' value="{{ team.id }}">
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">名称</label>
+                                    <div class="col-sm-12">
+                                        <!-- 定义名称input输入框，并从request中取值team.name赋值  -->
+
+                                        <input name="name" value="{{ team.name }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">负责人</label>
+                                    <div class="col-sm-12">
+                                        <!-- 定义负责人下拉框 -->
+
+                                        <select id='user' onchange="userchange(this)" name="user" class="form-control">
+                                            <!---    循环输出团队的负责人属性   ---->
+
+                                            {% for user in userall %}
+                                                <option value='{{ user.name }}'>{{ user.name }}</option>
+
+                                            {% endfor %}                                                </select>
+                                        <script>
+
+                                            $("#user").val("{{ team.user }}")<!-- 定义userchange方法，当user改变时执行 -->
+
+                                            function userchange(select) {
+
+                                                <!-- 将userid"的值改变为与 user项数相同的值，即user为第一项则userid为第一项-->
+
+                                                $("#userid").val($("#userid option:eq(" + select.selectedIndex + ")").val());
+                                            }
+
+                                            <!-- 定义GetQueryString方法，该方法目的为获取地址栏中的参数 -->
+
+                                            function GetQueryString(name) {
+
+                                                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+
+                                                var r = window.location.search.substr(1).match(reg);
+
+                                                if (r != null) return (r[2]);
+
+                                                return null;
+
+                                            }
+
+
+                                            <!-- 若地址栏中存在userid，使用GetQueryString方法获取该值 -->
+
+                                            var userid = GetQueryString("userid");
+
+                                            <!-- 如果userid不等于null -->
+
+                                            if (userid != null) {
+
+                                                <!-- 将地址栏中的 userid值赋值给id为userid的项-->
+
+                                                $("#userid").val(userid);
+
+                                                <!-- 获取到id为userid的项-->
+
+                                                var sel = document.getElementById("userid");
+
+                                                <!-- 获取到sel当前的选择项-->
+
+                                                var useridselectedindex = sel.selectedIndex;
+
+                                                <!-- 将id为user赋值为与userid相同的项数的值，即当前userid项目为第一项时，user项为第一项 -->
+
+                                                $("#user").val($("#user option:eq(" + useridselectedindex + ")").val());
+
+                                            }                                                         </script>
+                                    </div>
+                                </div> <!-- 设置display为none,设置为不可见 -->
+
+                                <div style='display:none;' class="form-group">
+                                    <label class="col-sm-12 control-label">负责人id</label>
+                                    <!-- 设置display为none,设置为不可见 -->
+
+                                    <div style='display:none;' class="col-sm-12">
+                                        <!-- 定义负责人id下拉框 -->
+
+                                        <select id='userid' onchange="userchange(this)" name="userid"
+                                                class="form-control">
+                                            <!---    循环输出团队的负责人id属性   ---->
+
+                                            {% for user in userall %}
+                                                <option value='{{ user.id }}'>{{ user.id }}</option>
+
+                                            {% endfor %}                                                </select>
+                                        <script>
+
+                                            $("#userid").val("{{ team.userid }}")<!-- 定义userchange方法，当user改变时执行 -->
+
+                                            function userchange(select) {
+
+                                                <!-- 将userid"的值改变为与 user项数相同的值，即user为第一项则userid为第一项-->
+
+                                                $("#userid").val($("#userid option:eq(" + select.selectedIndex + ")").val());
+                                            }
+
+                                            <!-- 定义GetQueryString方法，该方法目的为获取地址栏中的参数 -->
+
+                                            function GetQueryString(name) {
+
+                                                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+
+                                                var r = window.location.search.substr(1).match(reg);
+
+                                                if (r != null) return (r[2]);
+
+                                                return null;
+
+                                            }
+
+
+                                            <!-- 若地址栏中存在userid，使用GetQueryString方法获取该值 -->
+
+                                            var userid = GetQueryString("userid");
+
+                                            <!-- 如果userid不等于null -->
+
+                                            if (userid != null) {
+
+                                                <!-- 将地址栏中的 userid值赋值给id为userid的项-->
+
+                                                $("#userid").val(userid);
+
+                                                <!-- 获取到id为userid的项-->
+
+                                                var sel = document.getElementById("userid");
+
+                                                <!-- 获取到sel当前的选择项-->
+
+                                                var useridselectedindex = sel.selectedIndex;
+
+                                                <!-- 将id为user赋值为与userid相同的项数的值，即当前userid项目为第一项时，user项为第一项 -->
+
+                                                $("#user").val($("#user option:eq(" + useridselectedindex + ")").val());
+
+                                            }                                                         </script>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">介绍</label>
+                                    <div class="col-sm-12">
+                                        <textarea name="introduce" style="height: 200px;"
+                                                  class="form-control">{{ team.introduce }}</textarea></div>
+
+                                    <div class="form-group text-right m-b-0">
+                                        <button class="btn btn-primary waves-effect waves-light" type="submit">
+                                            修改
+                                        </button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div class="left-sidebar-hover"></div>
+
+<!-- Javascripts -->
+<script src="/static/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+<script src="/static/assets/plugins/materialize/js/materialize.min.js"></script>
+<script src="/static/assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
+<script src="/static/assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+<script src="/static/assets/js/alpha.min.js"></script>
+<script src="/static/assets/js/pages/form_elements.js"></script>
+<script>
+    if ("") {
+        alert("");
+    }
+</script>
+</body>
+</html>
+

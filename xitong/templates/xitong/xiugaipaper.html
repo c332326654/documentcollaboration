@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Title -->
+    <title>批注论文</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta charset="UTF-8">
+    <meta name="description" content="Responsive Admin Dashboard Template"/>
+    <meta name="keywords" content="admin,dashboard"/>
+    <meta name="author" content="Steelcoders"/>
+
+    <!-- Styles -->
+    <link type="text/css" rel="stylesheet" href="/static/assets/plugins/materialize/css/materialize.min.css"/>
+    <link href="/static/assets/icon.css" rel="stylesheet">
+    <link href="/static/assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
+
+
+    <!-- Theme Styles -->
+    <link href="/static/assets/css/alpha.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/assets/css/custom.css" rel="stylesheet" type="text/css"/>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script src="/static/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+</head>
+<body>
+<div class="loader-bg"></div>
+<div class="loader">
+    <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="spinner-layer spinner-spinner-teal lighten-1">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mn-content fixed-sidebar">
+    <header class="mn-header navbar-fixed">
+        <nav class="cyan darken-1">
+            <div class="nav-wrapper row">
+                <section class="material-design-hamburger navigation-toggle">
+                    <a href="#" data-activates="slide-out"
+                       class="button-collapse show-on-large material-design-hamburger__icon">
+                        <span class="material-design-hamburger__layer"></span>
+                    </a>
+                </section>
+                <div class="header-title col s3">
+                    <span class="chapter-title">Alpha</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <aside id="slide-out" class="side-nav white fixed">
+        <div class="side-nav-wrapper">
+            {% include "xitong/htmenu.html" %}
+        </div>
+    </aside>
+    <main class="mn-inner">
+        <div class="row">
+            <div class="col s12">
+                <div class="page-title">批注论文</div>
+            </div>
+            <div class="col s12 m12 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">批注论文</span><br>
+                        <div class="row">
+                            <form class="col s12" action="{% url 'paper:xiugaipaperact' %}" method="post"
+                                  enctype="multipart/form-data">
+                                <input style='display:none;' name='id' value="{{ paper.id }}">
+                                <input name='backurl' style='display:none;' value="/paper/paperchakan/">
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">标题</label>
+                                    <div class="col-sm-12">
+                                        <!-- 定义标题input输入框，并从request中取值paper.title赋值  -->
+
+                                        <input name="title" value="{{ paper.title }}" readonly class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">发布时间</label>
+                                    <div class="col-sm-12">
+                                        <!-- 定义发布时间输入框，并设置其值为当前时间  -->
+
+                                        <input type="text" readonly value="{{ paper.addtime }}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">内容</label>
+                                    <div class="col-sm-12">
+                                        <!-- 定义内容文本输入框  -->
+
+                                        <textarea id="content" name="content" style="height: 200px;"
+                                                  class="form-control">{{ paper.content }}</textarea>
+                                        <!-- 加载富文本组件所需css和js  -->
+
+                                        <link rel="stylesheet" type="text/css"
+                                              href="../../../static/simditor/styles/simditor.css"/>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/jquery.min.js"></script>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/module.min.js"></script>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/hotkeys.min.js"></script>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/uploader.min.js"></script>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/simditor.min.js"></script>
+                                        <script>
+                                            <!-- 将id为content的textarea设置为富文本  -->
+
+                                            var editor = new Simditor({
+                                                textarea: $('#content'),
+                                                toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'],											//optional options
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">标签1</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义标签1input输入框，并从request中取值paper.biaoqian1赋值  -->
+
+                                            <input name="biaoqian1" value="{{ paper.biaoqian1 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">标签2</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义标签2input输入框，并从request中取值paper.biaoqian2赋值  -->
+
+                                            <input name="biaoqian2" value="{{ paper.biaoqian2 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">标签3</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义标签3input输入框，并从request中取值paper.biaoqian3赋值  -->
+
+                                            <input name="biaoqian3" value="{{ paper.biaoqian3 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">标签4</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义标签4input输入框，并从request中取值paper.biaoqian4赋值  -->
+
+                                            <input name="biaoqian4" value="{{ paper.biaoqian4 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">tfidf词1</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义tfidf词1input输入框，并从request中取值paper.tfidfci1赋值  -->
+
+                                            <input name="tfidfci1" value="{{ paper.tfidfci1 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">tfidf词2</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义tfidf词2input输入框，并从request中取值paper.tfidfci2赋值  -->
+
+                                            <input name="tfidfci2" value="{{ paper.tfidfci2 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">tfidf词3</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义tfidf词3input输入框，并从request中取值paper.tfidfci3赋值  -->
+
+                                            <input name="tfidfci3" value="{{ paper.tfidfci3 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">tfidf词4</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义tfidf词4input输入框，并从request中取值paper.tfidfci4赋值  -->
+
+                                            <input name="tfidfci4" value="{{ paper.tfidfci4 }}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">kmeans词1</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义kmeans词1input输入框，并从request中取值paper.kmeansci1赋值  -->
+
+                                            <input name="kmeansci1" value="{{ paper.kmeansci1 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">kmeans词2</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义kmeans词2input输入框，并从request中取值paper.kmeansci2赋值  -->
+
+                                            <input name="kmeansci2" value="{{ paper.kmeansci2 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">kmeans词3</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义kmeans词3input输入框，并从request中取值paper.kmeansci3赋值  -->
+
+                                            <input name="kmeansci3" value="{{ paper.kmeansci3 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">kmeans词4</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义kmeans词4input输入框，并从request中取值paper.kmeansci4赋值  -->
+
+                                            <input name="kmeansci4" value="{{ paper.kmeansci4 }}" readonly class="form-control">
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="form-group" style="display: none">
+                                        <label class="col-sm-12 control-label">状态</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义状态下拉框 -->
+
+                                            <select id='state' onchange="已更改change(this)" name="state"
+                                                    class="form-control">
+                                                <option>已更改</option>
+                                                <option>已查看</option>
+                                                <!---    循环输出论文的状态属性   ---->
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group text-right m-b-0">
+                                        <button class="btn btn-primary waves-effect waves-light" type="submit">
+                                            修改
+                                        </button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div class="left-sidebar-hover"></div>
+
+<!-- Javascripts -->
+<script src="/static/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+<script src="/static/assets/plugins/materialize/js/materialize.min.js"></script>
+<script src="/static/assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
+<script src="/static/assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+<script src="/static/assets/js/alpha.min.js"></script>
+<script src="/static/assets/js/pages/form_elements.js"></script>
+<script>
+    if ("") {
+        alert("");
+    }
+</script>
+</body>
+</html>
+

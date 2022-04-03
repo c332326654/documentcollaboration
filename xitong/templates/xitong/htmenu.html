@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Insert title here</title>
+</head>
+<body>
+
+{% if request.session.shenfen == '管理员' %}
+
+    <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
+        <li class="no-padding"><a class="waves-effect waves-grey" href="/index/index"><i class="material-icons">settings_input_svideo</i>菜单栏</a>
+        </li>
+
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>个人中心<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'loginAndRegist:adminindex' %}" class="active-page">个人中心</a></li>
+                </ul>
+            </div>
+        </li>
+
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>管理员管理<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'admin:tianjiaadmin' %}" class="active-page">添加管理员</a></li>
+                    <li><a href="{% url 'admin:adminguanli' %}" class="active-page">管理员管理</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>用户管理<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'user:tianjiauser' %}" class="active-page">添加用户</a></li>
+                    <li><a href="{% url 'user:userguanli' %}" class="active-page">用户管理</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>团队管理<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'team:tianjiateam' %}" class="active-page">添加团队</a></li>
+                    <li><a href="{% url 'team:teamguanli' %}" class="active-page">团队管理</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>团队成员管理<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'teammembers:tianjiateammembers' %}" class="active-page">添加团队成员</a></li>
+                    <li><a href="{% url 'teammembers:teammembersguanli' %}" class="active-page">团队成员管理</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>聊天室管理<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'chat:tianjiachat' %}" class="active-page">添加聊天室</a></li>
+                    <li><a href="{% url 'chat:chatguanli' %}" class="active-page">聊天室管理</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>团队公告管理<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'teamnotice:tianjiateamnotice' %}" class="active-page">添加团队公告</a></li>
+                    <li><a href="{% url 'teamnotice:teamnoticeguanli' %}" class="active-page">团队公告管理</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>论文管理<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'paper:tianjiapaper' %}" class="active-page">添加论文</a></li>
+                    <li><a href="{% url 'paper:paperguanli' %}" class="active-page">论文管理</a></li>
+                </ul>
+            </div>
+        </li>
+
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>退出系统<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'loginAndRegist:tuichuxitong' %}" class="active-page">退出系统</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+
+{% endif %}{% if request.session.shenfen == '用户' %}
+
+    <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
+        <li class="no-padding"><a class="waves-effect waves-grey" href="/index/index"><i class="material-icons">settings_input_svideo</i>菜单栏</a>
+        </li>
+
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>个人中心<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'loginAndRegist:userindex' %}" class="active-page">个人中心</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>我的团队<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'team:usertianjiateam' %}" class="active-page">添加团队</a></li>
+                    <li><a href="{% url 'team:userteamguanli' %}" class="active-page">团队管理</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>参与的团队<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'teammembers:userteammembersguanli' %}" class="active-page">参与的团队</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>邀请管理<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'invitation:userinvitationguanli' %}" class="active-page">邀请管理</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>论文管理<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'paper:usertianjiapaper' %}" class="active-page">添加论文</a></li>
+                    <li><a href="{% url 'paper:userpaperguanli' %}" class="active-page">论文管理</a></li>
+                    <li><a href="{% url 'paper:paperchakan' %}" class="active-page">论文查看</a></li>
+                    <li><a href="{% url 'paper:papertuijian' %}" class="active-page">论文推荐</a></li>
+                </ul>
+            </div>
+        </li>
+
+
+        <li class="no-padding active">
+            <a class="collapsible-header waves-effect waves-grey active"><i class="material-icons">mode_edit</i>退出系统<i
+                    class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a href="{% url 'loginAndRegist:tuichuxitong' %}" class="active-page">退出系统</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+
+{% endif %}
+
+
+</body>
+</html>
+
+

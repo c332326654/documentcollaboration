@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Title -->
+    <title>添加论文</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta charset="UTF-8">
+    <meta name="description" content="Responsive Admin Dashboard Template"/>
+    <meta name="keywords" content="admin,dashboard"/>
+    <meta name="author" content="Steelcoders"/>
+
+    <!-- Styles -->
+    <link type="text/css" rel="stylesheet" href="/static/assets/plugins/materialize/css/materialize.min.css"/>
+    <link href="/static/assets/icon.css" rel="stylesheet">
+    <link href="/static/assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
+
+
+    <!-- Theme Styles -->
+    <link href="/static/assets/css/alpha.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/assets/css/custom.css" rel="stylesheet" type="text/css"/>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script src="/static/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+</head>
+<body>
+<div class="loader-bg"></div>
+<div class="loader">
+    <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="spinner-layer spinner-spinner-teal lighten-1">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+        <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mn-content fixed-sidebar">
+    <header class="mn-header navbar-fixed">
+        <nav class="cyan darken-1">
+            <div class="nav-wrapper row">
+                <section class="material-design-hamburger navigation-toggle">
+                    <a href="#" data-activates="slide-out"
+                       class="button-collapse show-on-large material-design-hamburger__icon">
+                        <span class="material-design-hamburger__layer"></span>
+                    </a>
+                </section>
+                <div class="header-title col s3">
+                    <span class="chapter-title">Alpha</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <aside id="slide-out" class="side-nav white fixed">
+        <div class="side-nav-wrapper">
+            {% include "xitong/htmenu.html" %}
+        </div>
+    </aside>
+    <main class="mn-inner">
+        <div class="row">
+            <div class="col s12">
+                <div class="page-title">添加论文</div>
+            </div>
+            <div class="col s12 m12 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">添加论文</span><br>
+                        <div class="row">
+                            <form class="col s12" action="{% url 'paper:tianjiapaperact' %}" method="post"
+                                  enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">标题</label>
+                                    <div class="col-sm-12">
+                                        <!-- 定义title输入框 -->
+
+                                        <input name="title" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">发布时间</label>
+                                    <div class="col-sm-12">
+                                        <!-- 将id为dangqianshijian的项内容设置为当前时间-->
+
+                                        <script>
+                                            $(function () {
+                                                document.getElementById("dangqianshijian").value = new Date().toLocaleString();
+                                            })
+                                        </script>
+                                        <!-- 定义id为dangqianshijian的input输入框，并设置为只读-->
+
+                                        <input readonly type="text" id="dangqianshijian" name="addtime"
+                                               class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12 control-label">内容</label>
+                                    <div class="col-sm-12">
+                                        <!-- 定义content文本输入框，并将其加载为富文本-->
+
+                                        <textarea id="content" name="content" style="height: 200px;"
+                                                  class="form-control"></textarea>
+                                        <!-- 导入富文本组件 -->
+
+                                        <link rel="stylesheet" type="text/css"
+                                              href="../../../static/simditor/styles/simditor.css"/>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/jquery.min.js"></script>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/module.min.js"></script>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/hotkeys.min.js"></script>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/uploader.min.js"></script>
+                                        <script type="text/javascript"
+                                                src="../../../static/simditor/scripts/simditor.min.js"></script>
+                                        <script>
+                                            <!-- 将id为content的textarea加载为富文本 -->
+
+                                            var editor = new Simditor({
+                                                textarea: $('#content'),
+                                                toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'],											//optional options
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">标签1</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义biaoqian1输入框 -->
+
+                                            <input name="biaoqian1" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">标签2</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义biaoqian2输入框 -->
+
+                                            <input name="biaoqian2" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">标签3</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义biaoqian3输入框 -->
+
+                                            <input name="biaoqian3" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">标签4</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义biaoqian4输入框 -->
+
+                                            <input name="biaoqian4" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">tfidf词1</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义tfidfci1输入框 -->
+
+                                            <input name="tfidfci1" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">tfidf词2</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义tfidfci2输入框 -->
+
+                                            <input name="tfidfci2" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">tfidf词3</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义tfidfci3输入框 -->
+
+                                            <input name="tfidfci3" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">tfidf词4</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义tfidfci4输入框 -->
+
+                                            <input name="tfidfci4" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">kmeans词1</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义kmeansci1输入框 -->
+
+                                            <input name="kmeansci1" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">kmeans词2</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义kmeansci2输入框 -->
+
+                                            <input name="kmeansci2" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">kmeans词3</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义kmeansci3输入框 -->
+
+                                            <input name="kmeansci3" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">kmeans词4</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义kmeansci4输入框 -->
+
+                                            <input name="kmeansci4" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">权限</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义权限下拉框 -->
+
+                                            <select id='jurisdiction' onchange="自己可见change(this)" name="jurisdiction"
+                                                    class="form-control">
+                                                <option>自己可见</option>
+                                                <option>团队可见</option>
+                                                <option>公众可见</option>
+                                                <option>负责人可见</option>
+                                            </select><!-- 给select赋值 -->
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">用户</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义用户下拉框 -->
+
+                                            <select id='user' onchange="userchange(this)" name="user" id='user'
+                                                    onchange="userchange(this)" name="user" class="form-control">
+                                                {% for user in userall %}
+                                                    <option value='{{ user.name }}'>{{ user.name }}</option>
+
+                                                {% endfor %}                                                </select>
+                                            <script>
+
+                                                $("#user").val("{{ paper.user }}")<!-- 定义userchange方法，当user改变时执行 -->
+
+                                                function userchange(select) {
+
+                                                    <!-- 将userid"的值改变为与 user项数相同的值，即user为第一项则userid为第一项-->
+
+                                                    $("#userid").val($("#userid option:eq(" + select.selectedIndex + ")").val());
+                                                }
+
+                                                <!-- 定义GetQueryString方法，该方法目的为获取地址栏中的参数 -->
+
+                                                function GetQueryString(name) {
+
+                                                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+
+                                                    var r = window.location.search.substr(1).match(reg);
+
+                                                    if (r != null) return (r[2]);
+
+                                                    return null;
+
+                                                }
+
+
+                                                <!-- 若地址栏中存在userid，使用GetQueryString方法获取该值 -->
+
+                                                var userid = GetQueryString("userid");
+
+                                                <!-- 如果userid不等于null -->
+
+                                                if (userid != null) {
+
+                                                    <!-- 将地址栏中的 userid值赋值给id为userid的项-->
+
+                                                    $("#userid").val(userid);
+
+                                                    <!-- 获取到id为userid的项-->
+
+                                                    var sel = document.getElementById("userid");
+
+                                                    <!-- 获取到sel当前的选择项-->
+
+                                                    var useridselectedindex = sel.selectedIndex;
+
+                                                    <!-- 将id为user赋值为与userid相同的项数的值，即当前userid项目为第一项时，user项为第一项 -->
+
+                                                    $("#user").val($("#user option:eq(" + useridselectedindex + ")").val());
+
+                                                }                                                         </script>
+                                        </div>
+                                    </div> <!-- 设置display为none,设置为不可见 -->
+
+                                    <div style='display:none;' class="form-group">
+                                        <label class="col-sm-12 control-label">用户id</label>
+                                        <!-- 设置display为none,设置为不可见 -->
+
+                                        <div style='display:none;' class="col-sm-12">
+                                            <!-- 定义用户id下拉框 -->
+
+                                            <select id='userid' onchange="userchange(this)" name="userid" id='userid'
+                                                    onchange="userchange(this)" name="userid" class="form-control">
+                                                {% for user in userall %}
+                                                    <option value='{{ user.id }}'>{{ user.id }}</option>
+
+                                                {% endfor %}                                                </select>
+                                            <script>
+
+                                                $("#userid").val("{{ paper.userid }}")<!-- 定义userchange方法，当user改变时执行 -->
+
+                                                function userchange(select) {
+
+                                                    <!-- 将userid"的值改变为与 user项数相同的值，即user为第一项则userid为第一项-->
+
+                                                    $("#userid").val($("#userid option:eq(" + select.selectedIndex + ")").val());
+                                                }
+
+                                                <!-- 定义GetQueryString方法，该方法目的为获取地址栏中的参数 -->
+
+                                                function GetQueryString(name) {
+
+                                                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+
+                                                    var r = window.location.search.substr(1).match(reg);
+
+                                                    if (r != null) return (r[2]);
+
+                                                    return null;
+
+                                                }
+
+
+                                                <!-- 若地址栏中存在userid，使用GetQueryString方法获取该值 -->
+
+                                                var userid = GetQueryString("userid");
+
+                                                <!-- 如果userid不等于null -->
+
+                                                if (userid != null) {
+
+                                                    <!-- 将地址栏中的 userid值赋值给id为userid的项-->
+
+                                                    $("#userid").val(userid);
+
+                                                    <!-- 获取到id为userid的项-->
+
+                                                    var sel = document.getElementById("userid");
+
+                                                    <!-- 获取到sel当前的选择项-->
+
+                                                    var useridselectedindex = sel.selectedIndex;
+
+                                                    <!-- 将id为user赋值为与userid相同的项数的值，即当前userid项目为第一项时，user项为第一项 -->
+
+                                                    $("#user").val($("#user option:eq(" + useridselectedindex + ")").val());
+
+                                                }                                                         </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">状态</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义状态下拉框 -->
+
+                                            <select id='state' onchange="已更改change(this)" name="state"
+                                                    class="form-control">
+                                                <option>已更改</option>
+                                                <option>已查看</option>
+                                            </select><!-- 给select赋值 -->
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12 control-label">文件</label>
+                                        <div class="col-sm-12">
+                                            <!-- 定义file的文件选择框，并设置name为filefile-->
+
+                                            <input type="file" name="filefile" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group text-right m-b-0">
+                                        <button class="btn btn-primary waves-effect waves-light" type="submit">
+                                            添加
+                                        </button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div class="left-sidebar-hover"></div>
+
+<!-- Javascripts -->
+<script src="/static/assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+<script src="/static/assets/plugins/materialize/js/materialize.min.js"></script>
+<script src="/static/assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
+<script src="/static/assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+<script src="/static/assets/js/alpha.min.js"></script>
+<script src="/static/assets/js/pages/form_elements.js"></script>
+<script>
+    if ("") {
+        alert("");
+    }
+</script>
+</body>
+</html>
+
